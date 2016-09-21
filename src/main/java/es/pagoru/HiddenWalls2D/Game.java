@@ -1,6 +1,8 @@
 package es.pagoru.HiddenWalls2D;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created by pablo on 21/9/16.
@@ -8,13 +10,21 @@ import java.util.Scanner;
 public class Game {
 
     public Game(){
-        loop();
+        try {
+            loop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Map map = new Map(Map.DEFAULT_MAP);
-    private Scanner scanner = new Scanner(System.in);
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public void loop(){
+    /**
+     * Bucle del joc
+     * @throws IOException
+     */
+    public void loop() throws IOException {
 
         String infoText = "Per mouret, introdueix: ↑'w', ↓'s', ←'a' o →'d'";
 
@@ -22,7 +32,7 @@ public class Game {
 
             printWindow(infoText, 0);
 
-            String key = scanner.nextLine();
+            String key = bufferedReader.readLine();
             int x = 0;
             int y = 0;
             if(key.equalsIgnoreCase("w")){
@@ -36,7 +46,8 @@ public class Game {
             }
 
             if(x == 0 && y == 0){
-                return;
+                infoText = "Per mouret, introdueix: ↑'w', ↓'s', ←'a' o →'d'";
+                continue;
             }
             Vector2Di newPos = new Vector2Di(x, y);
 
@@ -86,9 +97,9 @@ public class Game {
                 printWindow("¡Gracies per jugar! :)", 2);
                 break;
             }
-            infoText = "No esta permesa aquesta tecla.";
+            infoText = "No esta permesa aquesta aacció.";
         }
-
+        bufferedReader.close();
 
     }
 
