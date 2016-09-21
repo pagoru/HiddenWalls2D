@@ -27,4 +27,17 @@ public class Vector2Di {
         return this;
     }
 
+    public Vector2Di copy(){
+        return new Vector2Di(x, y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Vector2Di){
+            Vector2Di vector = (Vector2Di) obj;
+            return vector.getX() == getX() && vector.getY() == getY();
+        }
+        return (this == obj);
+    }
+
 }

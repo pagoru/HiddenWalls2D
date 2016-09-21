@@ -10,7 +10,7 @@ public class Map {
 
     public static final int[] DEFAULT_MAP ={
             2,2,2,2,1,2,1,1,1,2,2,2,5,2,2,2,1,2,2,2,2,1,2,2,2,2,2,2,2,2,
-            2,2,2,1,2,2,1,2,2,2,1,2,1,1,1,2,1,2,4,4,2,2,2,1,2,1,1,1,1,1,
+            2,2,2,2,2,2,1,2,2,2,1,2,1,1,1,2,1,2,4,4,2,2,2,1,2,1,1,1,1,1,
             2,1,1,1,2,1,1,2,1,2,1,2,2,2,1,2,1,1,2,2,2,1,2,1,2,2,2,2,2,2,
             2,2,1,2,2,2,2,2,1,1,1,2,1,2,1,2,2,2,2,4,2,1,1,1,5,2,1,1,4,1,
             1,1,1,2,1,1,1,1,1,2,1,2,1,1,1,4,1,1,2,2,2,2,2,1,1,2,1,2,2,2,
@@ -22,13 +22,15 @@ public class Map {
     };
 
     public enum MapType {
-        EXIT("E"),
-        WALL("#"),
-        ROAD("-"),
-        PICKAXE("?"),
-        BOMBS("@"),
-        HEARTS("H"),
-        EMPTY(" ");
+        EXIT("▽"),
+        WALL("▩"),
+        ROAD("▢"),
+        PICKAXE("ψ"),
+        BOMB("◉"),
+        HEARTS("❤"),
+        EMPTY(" "),
+        PLAYER("P"),
+        DESTROYED_WALL("▤");
 
         private String symbol;
 
@@ -38,6 +40,10 @@ public class Map {
 
         public String getSymbol(){
             return symbol;
+        }
+
+        public void setSymbol(String symbol){
+            this.symbol = symbol;
         }
     }
 
@@ -51,8 +57,7 @@ public class Map {
 
     public Map(int[] map){
         this.map = map;
-        player.setPosition(new Vector2Di(1, 0));
-        trail[5] = true;
+        addPlayerPosition(new Vector2Di(0, 0));
     }
 
     /**
@@ -63,19 +68,44 @@ public class Map {
         return map;
     }
 
-    public void addPosition(Vector2Di position, MapType type){
-        if(position.getX() > WIDTH || position.getY() > HEIGHT){
-            return ;
+    public void destroyWall(Vector2Di position){
+        if(position.getX() >= WIDTH || position.getX() < 0
+                || position.getY() >= HEIGHT || position.getY() < 0){
+            return;
+        }
+        this.map[(position.getY() * WIDTH) + position.getX()] = MapType.DESTROYED_WALL.ordinal();
+    }
+
+    public void setPosition(Vector2Di position, MapType type){
+        if(position.getX() >= WIDTH || position.getX() < 0
+                || position.getY() >= HEIGHT || position.getY() < 0){
+            return;
         }
         this.map[(position.getY() * WIDTH) + position.getX()] = type.ordinal();
     }
 
+    public MapType getPrintablePosition(Vector2Di position){
+        if(getPlayer().getPosition().equals(position)){
+            MapType playerMapType = MapType.PLAYER;
+            playerMapType.setSymbol(getPlayer().getSymbol());
+            return playerMapType;
+        }
+        MapType type = getPosition(position);
+        if(!canPlayerSeePosition(position) && (type.equals(MapType.WALL) || type.equals(MapType.ROAD))){
+            return MapType.EMPTY;
+        }
+        return MapType.values()[this.map[(position.getY() * WIDTH) + position.getX()]];
+    }
+
     public MapType getPosition(Vector2Di position){
-        if(position.getX() > WIDTH || position.getY() > HEIGHT){
+        if(position.getX() >= WIDTH || position.getX() < 0
+                || position.getY() >= HEIGHT || position.getY() < 0){
             return MapType.WALL;
         }
-        if(!canPlayerSeePosition(position)){
-            return MapType.EMPTY;
+        if(getPlayer().getPosition().equals(position)){
+            MapType playerMapType = MapType.PLAYER;
+            playerMapType.setSymbol(getPlayer().getSymbol());
+            return playerMapType;
         }
         return MapType.values()[this.map[(position.getY() * WIDTH) + position.getX()]];
     }
@@ -84,26 +114,25 @@ public class Map {
         return trail[(position.getY() * WIDTH) + position.getX()];
     }
 
+    public void addTrail(Vector2Di position) {
+        if(position.getX() >= WIDTH || position.getX() < 0
+                || position.getY() >= HEIGHT || position.getY() < 0){
+            return;
+        }
+        trail[(position.getY() * WIDTH) + position.getX()] = true;
+    }
+
+    public void addPlayerPosition(Vector2Di position){
+        getPlayer().addPosition(position);
+        addTrail(getPlayer().getPosition());
+    }
+
     public Player getPlayer(){
         return player;
     }
 
     public boolean canPlayerSeePosition(Vector2Di position){
-        for(int y = -1; y <= 1; y++){
-            for(int x = -1; x <= 1; x++){
-
-                Vector2Di pos = position.add(new Vector2Di(x, y));
-
-                if(pos.getX() >= 0 && pos.getX() < WIDTH
-                        && pos.getY() >= 0 && pos.getY() < HEIGHT){
-                    if(getTrail(pos)){
-                        return true;
-                    }
-                }
-
-            }
-        }
-        return true;
+        return getTrail(position);
     }
 
 }

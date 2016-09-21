@@ -7,8 +7,8 @@ public class Player {
 
     private String symbol;
     private Vector2Di positon;
-    private int maxHearts;
     private int hearts;
+    private boolean pickaxe;
 
     public Player(String symbol){
         this.symbol = symbol.substring(0, 1);
@@ -33,24 +33,41 @@ public class Player {
     }
 
     public int getHearts(){
-        if(hearts > maxHearts){
-            this.maxHearts = hearts;
-        }
         return hearts;
     }
 
+    /**
+     * [❤ ❤ ❤ ❤ ❤] o [❤ ❤ ❤ ❤  ]
+     * @return
+     */
     public String getPrintableHearts(){
         String pHearts = "[";
-        for(int h = 0; h < maxHearts; h++){
+        for(int h = 0; h < 5; h++){
             if(h != 0){
                 pHearts += " ";
             }
+            if(hearts > h){
+                pHearts += "❤";
+            } else {
+                pHearts += "☠";
+            }
         }
-        return  pHearts;
+        return pHearts + "]";
     }
 
     public void addHearts(int hearts){
         this.hearts += hearts;
+        if(this.hearts > 5){
+            this.hearts = 5;
+        }
+    }
+
+    public void addPickaxe(){
+        this.pickaxe = true;
+    }
+
+    public boolean hasPickaxe(){
+        return pickaxe;
     }
 
 }
