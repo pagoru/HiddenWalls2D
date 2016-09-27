@@ -31,6 +31,12 @@ public class Vector2Di {
         return new Vector2Di(x, y);
     }
 
+    public Vector2Di substract(Vector2Di vector2Di){
+        this.x -= vector2Di.getX();
+        this.y -= vector2Di.getY();
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Vector2Di){

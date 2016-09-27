@@ -90,7 +90,6 @@ public class Map {
             playerMapType.setSymbol(getPlayer().getSymbol());
             return playerMapType;
         }
-        MapType type = getPosition(position);
         if(!canPlayerSeePosition(position)){
             return MapType.EMPTY;
         }

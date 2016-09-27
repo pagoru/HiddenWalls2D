@@ -43,6 +43,34 @@ public class Game {
                 x--;
             } else if(key.equalsIgnoreCase("d")){
                 x++;
+            } else if(key.equalsIgnoreCase("h")){
+                //28 x 9
+                Vector2Di vector2Di = map.getPlayer().getPosition().copy().substract(new Vector2Di(28, 9));
+                infoText = "La sortida esta ";
+                if(vector2Di.getX() < 0){
+                    if(vector2Di.getY() < 0){
+                        infoText += "abaix a l'esquerra.";
+                    } else if(vector2Di.getY() > 0){
+                        infoText += "adalt a l'esquerra.";
+                    } else { // y == 0
+                        infoText += "a l'esquerra.";
+                    }
+                } else if(vector2Di.getX() > 0){
+                    if(vector2Di.getY() < 0){
+                        infoText += "abaix a la dreta.";
+                    } else if(vector2Di.getY() > 0){
+                        infoText += "adalt a la dreta.";
+                    } else { // y == 0
+                        infoText += "a la dreta.";
+                    }
+                } else { // x == 0
+                    if(vector2Di.getY() < 0){
+                        infoText += "abaix.";
+                    } else if(vector2Di.getY() > 0){
+                        infoText += "adalt.";
+                    }
+                }
+                continue;
             }
 
             if(x == 0 && y == 0){
@@ -55,7 +83,7 @@ public class Game {
             System.out.println(mapType.name());
             if(mapType.equals(Map.MapType.ROAD) || mapType.equals(Map.MapType.DESTROYED_WALL)){
                 map.addPlayerPosition(newPos);
-                infoText = "";
+                infoText = "Si necesites ajuda, introdueix 'h'";
                 continue;
             } else if(mapType.equals(Map.MapType.BOMB)){
                 map.addPlayerPosition(newPos);
@@ -104,15 +132,30 @@ public class Game {
     }
 
     /**
-     * Ha de retornar 58 caracters per tal de completar correctament la pantalla
+     * Retorna 58 caracters amb espais si el text es inferior per tal de completar la pantalla
      * @return
      */
     private String getText(String text){
-        int ci = 58 - text.length();
-        for (int i = 0; i < ci; i++){
-            text += " ";
+        return text + getAmountOfString(" ", 58 - text.length());
+    }
+
+    private String getCenterText(String text){
+        int c = 58 - text.length()/2;
+        return getAmountOfString(" ", c) + text + getAmountOfString(" ", c);
+    }
+
+    /**
+     * Retorna una quantitat concreta de la repetició del text que s'introdueixi
+     * @param text
+     * @param quantity
+     * @return
+     */
+    private String getAmountOfString(String text, int quantity){
+        String nText = "";
+        for (int i = 0; i < quantity; i++){
+            nText += text;
         }
-        return text;
+        return nText;
     }
 
     public void printWindow(String infoText, int status){
@@ -134,8 +177,8 @@ public class Game {
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
-                System.out.println("│                            GAME                            │");
-                System.out.println("│                            OVER                            │");
+                System.out.println("│ " + getText("GAME") + " │");
+                System.out.println("│ " + getText("OVER") + " │");
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
@@ -144,7 +187,7 @@ public class Game {
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
-                System.out.println("│                             YOU                            │");
+                System.out.println("│ " + getText("YOU") + " │");
                 System.out.println("│                             WIN                            │");
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
