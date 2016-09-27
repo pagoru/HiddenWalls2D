@@ -97,7 +97,7 @@ public class Game {
                 printWindow("¡Gracies per jugar! :)", 2);
                 break;
             }
-            infoText = "No esta permesa aquesta aacció.";
+            infoText = "No esta permesa aquesta acció.";
         }
         bufferedReader.close();
 
@@ -157,7 +157,7 @@ public class Game {
         System.out.println("╞══════════════════════════════════╤═════════════════════════╡");
         System.out.println(
                 "│ Hidden Walls 2D " + HiddenWalls2D.VERSION
-                        + "  by @pagoru │ Jugador: '"
+                        + " by @pagoru │ Jugador: '"
                         + map.getPlayer().getSymbol() + "' "
                         + map.getPlayer().getPrintableHearts() + "│");
         System.out.println("╘══════════════════════════════════╧═════════════════════════╛");
