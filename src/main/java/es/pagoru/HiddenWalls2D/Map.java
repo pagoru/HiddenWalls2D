@@ -91,7 +91,7 @@ public class Map {
             return playerMapType;
         }
         MapType type = getPosition(position);
-        if(!canPlayerSeePosition(position) && (type.equals(MapType.WALL) || type.equals(MapType.ROAD))){
+        if(!canPlayerSeePosition(position)){
             return MapType.EMPTY;
         }
         return MapType.values()[this.map[(position.getY() * WIDTH) + position.getX()]];
