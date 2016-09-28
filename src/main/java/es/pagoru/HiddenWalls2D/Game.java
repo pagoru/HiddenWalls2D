@@ -113,7 +113,7 @@ public class Game {
                     mapType = map.getPosition(map.getPlayer().getPosition().copy().add(newPos));
                     infoText = "No es poden destruir les parets externes.";
                     if(!mapType.equals(Map.MapType.WALL)){
-                        map.getPlayer().addPosition(newPos);
+                        map.addPlayerPosition(newPos);
                         infoText = "S'ha destruït una paret.";
                     }
                     continue;
