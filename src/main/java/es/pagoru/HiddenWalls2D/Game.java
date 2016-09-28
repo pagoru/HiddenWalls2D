@@ -47,7 +47,7 @@ public class Game {
                 //28 x 9
                 Vector2Di vector2Di = map.getPlayer().getPosition().copy().substract(new Vector2Di(28, 9));
                 infoText = "La sortida esta ";
-                if(vector2Di.getX() < 0){
+                if(vector2Di.getX() > 0){
                     if(vector2Di.getY() < 0){
                         infoText += "abaix a l'esquerra.";
                     } else if(vector2Di.getY() > 0){
@@ -55,7 +55,7 @@ public class Game {
                     } else { // y == 0
                         infoText += "a l'esquerra.";
                     }
-                } else if(vector2Di.getX() > 0){
+                } else if(vector2Di.getX() < 0){
                     if(vector2Di.getY() < 0){
                         infoText += "abaix a la dreta.";
                     } else if(vector2Di.getY() > 0){
