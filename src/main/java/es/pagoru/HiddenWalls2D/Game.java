@@ -141,7 +141,7 @@ public class Game {
 
     private String getCenterText(String text){
         int c = (58 - text.length())/2;
-        return getAmountOfString(" ", c) + text + getAmountOfString(" ", c);
+        return getAmountOfString(" ", c) + text + getAmountOfString(" ", (c%2 == 0? c : c +1));
     }
 
     /**
