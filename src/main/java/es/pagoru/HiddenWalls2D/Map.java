@@ -8,6 +8,8 @@ public class Map {
     public static final int WIDTH = 30;
     public static final int HEIGHT = 10;
 
+    public static final Vector2Di EXIT = new Vector2Di(28, 9);
+
     public static final int[] DEFAULT_MAP ={
             2,0,2,2,1,2,1,1,1,2,2,2,5,2,2,2,1,2,2,2,2,1,2,2,2,2,2,2,2,2,
             2,2,2,2,2,2,1,2,2,2,1,2,1,1,1,2,1,2,4,4,2,2,2,1,2,1,1,1,1,1,
@@ -57,6 +59,7 @@ public class Map {
 
     public Map(int[] map){
         this.map = map;
+        setPosition(EXIT, MapType.EXIT);
         addPlayerPosition(new Vector2Di(0, 0));
     }
 

@@ -45,7 +45,7 @@ public class Game {
                 x++;
             } else if(key.equalsIgnoreCase("h")){
                 //28 x 9
-                Vector2Di vector2Di = map.getPlayer().getPosition().copy().substract(new Vector2Di(28, 9));
+                Vector2Di vector2Di = map.getPlayer().getPosition().copy().substract(Map.EXIT);
                 infoText = "La sortida esta ";
                 if(vector2Di.getX() > 0){
                     if(vector2Di.getY() < 0){
