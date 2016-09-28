@@ -8,7 +8,7 @@ public class Player {
     private String symbol;
     private Vector2Di positon;
     private int hearts;
-    private boolean pickaxe = true;
+    private boolean pickaxe;
 
     public Player(String symbol){
         this.symbol = symbol.substring(0, 1);

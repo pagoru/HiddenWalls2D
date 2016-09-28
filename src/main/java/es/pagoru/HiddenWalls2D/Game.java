@@ -140,7 +140,7 @@ public class Game {
     }
 
     private String getCenterText(String text){
-        int c = 58 - text.length()/2;
+        int c = (58 - text.length())/2;
         return getAmountOfString(" ", c) + text + getAmountOfString(" ", c);
     }
 
@@ -177,8 +177,8 @@ public class Game {
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
-                System.out.println("│ " + getText("GAME") + " │");
-                System.out.println("│ " + getText("OVER") + " │");
+                System.out.println("│ " + getCenterText("GAME") + " │");
+                System.out.println("│ " + getCenterText("OVER") + " │");
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
@@ -187,8 +187,8 @@ public class Game {
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
-                System.out.println("│ " + getText("YOU") + " │");
-                System.out.println("│                             WIN                            │");
+                System.out.println("│ " + getCenterText("YOU") + " │");
+                System.out.println("│ " + getCenterText("WIN") + " │");
                 for(int i = 0; i < 4; i++){
                     System.out.println("│ " + getText("") + " │");
                 }
