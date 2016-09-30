@@ -139,6 +139,11 @@ public class Game {
         return text + getAmountOfString(" ", 58 - text.length());
     }
 
+    /**
+     * Retorna text amb els 58 caracters necesaris completament centrat en la pantalla.
+     * @param text
+     * @return
+     */
     private String getCenterText(String text){
         int c = (58 - text.length())/2;
         return getAmountOfString(" ", c) + text + getAmountOfString(" ", (c%2 == 0? c : c +1));
@@ -158,6 +163,12 @@ public class Game {
         return nText;
     }
 
+    /**
+     * Imprimeix la pantalla del joc amb la informació necesaria y el status que es vol donar.
+     * @param infoText
+     * @param status
+     * 0 - Printa el mapa
+     */
     public void printWindow(String infoText, int status){
         for(int i = 0; i < 10; i++){
             System.out.println();

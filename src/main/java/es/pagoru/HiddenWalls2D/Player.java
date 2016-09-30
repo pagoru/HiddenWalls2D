@@ -5,9 +5,25 @@ package es.pagoru.HiddenWalls2D;
  */
 public class Player {
 
+    /**
+     * Simbol que es mostrará de l'usuari
+     */
     private String symbol;
+
+    /**
+     * Posició de l'usuari
+     */
     private Vector2Di positon;
+
+    /**
+     * Vida actual de l'usuari
+     * max 5
+     */
     private int hearts;
+
+    /**
+     * Si l'usuari te la piqueta
+     */
     private boolean pickaxe;
 
     public Player(String symbol){
@@ -16,28 +32,41 @@ public class Player {
         addHearts(5);
     }
 
+    /**
+     * Suma la posició especificada a l'usuari
+     * @param positon
+     */
     public void addPosition(Vector2Di positon){
         this.positon.add(positon);
     }
 
-    public void setPosition(Vector2Di positon){
-        this.positon = positon;
-    }
-
+    /**
+     * Retorna la posició actual de l'usuari
+     * @return
+     */
     public Vector2Di getPosition(){
         return positon;
     }
 
+    /**
+     * Retorna el simbol del usuari
+     * @return
+     */
     public String getSymbol(){
         return symbol;
     }
 
+    /**
+     * Retorna les vidas que li quedan a l'usuari
+     * @return
+     */
     public int getHearts(){
         return hearts;
     }
 
     /**
-     * [❤ ❤ ❤ ❤ ❤] o [❤ ❤ ❤ ❤  ]
+     * Retorna les vides de l'usuari de forma que es puguin mostrar
+     * [❤ ❤ ❤ ❤ ❤] ... [❤ ❤ ❤ ❤ ☠]
      * @return
      */
     public String getPrintableHearts(){
@@ -46,7 +75,7 @@ public class Player {
             if(h != 0){
                 pHearts += " ";
             }
-            if(hearts > h){
+            if(getHearts() > h){
                 pHearts += "❤";
             } else {
                 pHearts += "☠";
@@ -55,6 +84,10 @@ public class Player {
         return pHearts + "]";
     }
 
+    /**
+     * Suma les vidas especificades a l'usuari
+     * @param hearts
+     */
     public void addHearts(int hearts){
         this.hearts += hearts;
         if(this.hearts > 5){
@@ -62,10 +95,17 @@ public class Player {
         }
     }
 
+    /**
+     * Afegeix a l'usuari la piqueta
+     */
     public void addPickaxe(){
         this.pickaxe = true;
     }
 
+    /**
+     * Comproba si l'usuari te la piqueta
+     * @return
+     */
     public boolean hasPickaxe(){
         return pickaxe;
     }
