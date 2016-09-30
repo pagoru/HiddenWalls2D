@@ -22,15 +22,15 @@ public class Map {
     };
 
     public enum MapType {
-        EXIT("▽"),
-        WALL("▩"),
-        ROAD("▢"),
-        PICKAXE("ψ"),
-        BOMB("◉"),
-        HEARTS("❤"),
+        EXIT("V"),
+        WALL("█"),
+        ROAD("░"),
+        PICKAXE("¥"),
+        BOMB("@"),
+        HEARTS("H"),
         EMPTY(" "),
         PLAYER("P"),
-        DESTROYED_WALL("▤");
+        DESTROYED_WALL("▒");
 
         private String symbol;
 
@@ -91,9 +91,9 @@ public class Map {
             return playerMapType;
         }
         MapType type = getPosition(position);
-        if(!canPlayerSeePosition(position) && (type.equals(MapType.WALL) || type.equals(MapType.ROAD))){
-            return MapType.EMPTY;
-        }
+//        if(!canPlayerSeePosition(position) && (type.equals(MapType.WALL) || type.equals(MapType.ROAD))){
+//            return MapType.EMPTY;
+//        }
         return MapType.values()[this.map[(position.getY() * WIDTH) + position.getX()]];
     }
 

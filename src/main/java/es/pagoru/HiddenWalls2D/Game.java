@@ -71,13 +71,13 @@ public class Game {
                 map.addPlayerPosition(newPos);
                 map.getPlayer().addHearts(1);
                 map.setPosition(map.getPlayer().getPosition(), Map.MapType.ROAD);
-                infoText = "¡Has recuperat una vida! (❤)";
+                infoText = "¡Has recuperat una vida! (" + Map.MapType.HEARTS.getSymbol() + ")";
                 continue;
             } else if(mapType.equals(Map.MapType.PICKAXE)){
                 map.addPlayerPosition(newPos);
                 map.getPlayer().addPickaxe();
                 map.setPosition(map.getPlayer().getPosition(), Map.MapType.ROAD);
-                infoText = "¡Has aconseguit la piqueta! (ψ)";
+                infoText = "¡Has aconseguit la piqueta! (" + Map.MapType.PICKAXE.getSymbol() + ")";
                 continue;
             } else if(mapType.equals(Map.MapType.WALL)){
                 if(map.getPlayer().hasPickaxe()){
@@ -119,48 +119,48 @@ public class Game {
         for(int i = 0; i < 10; i++){
             System.out.println();
         }
-        System.out.println("╒════════════════════════════════════════════════════════════╕");
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
         switch (status){
             case 0:
                 for(int y = 0; y < Map.HEIGHT; y++){
-                    System.out.print("│");
+                    System.out.print("║");
                     for(int x = 0; x < Map.WIDTH; x++){
-                        System.out.print(map.getPrintablePosition(new Vector2Di(x, y)).getSymbol() + " ");
+                        System.out.print(map.getPrintablePosition(new Vector2Di(x, y)).getSymbol() + "");
                     }
-                    System.out.println("│");
+                    System.out.println("║");
                 }
                 break;
             case 1:
                 for(int i = 0; i < 4; i++){
-                    System.out.println("│ " + getText("") + " │");
+                    System.out.println("║ " + getText("") + " ║");
                 }
-                System.out.println("│                            GAME                            │");
-                System.out.println("│                            OVER                            │");
+                System.out.println("║                            GAME                            ║");
+                System.out.println("║                            OVER                            ║");
                 for(int i = 0; i < 4; i++){
-                    System.out.println("│ " + getText("") + " │");
+                    System.out.println("║ " + getText("") + " ║");
                 }
                 break;
             case 2:
                 for(int i = 0; i < 4; i++){
-                    System.out.println("│ " + getText("") + " │");
+                    System.out.println("║ " + getText("") + " ║");
                 }
-                System.out.println("│                             YOU                            │");
-                System.out.println("│                             WIN                            │");
+                System.out.println("║                             YOU                            ║");
+                System.out.println("║                             WIN                            ║");
                 for(int i = 0; i < 4; i++){
-                    System.out.println("│ " + getText("") + " │");
+                    System.out.println("║ " + getText("") + " ║");
                 }
                 break;
         }
 
-        System.out.println("╞════════════════════════════════════════════════════════════╡");
-        System.out.println("│ " + getText(infoText) + " │");
-        System.out.println("╞══════════════════════════════════╤═════════════════════════╡");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+        System.out.println("║ " + getText(infoText) + " ║");
+        System.out.println("╠══════════════════════════════════╦═════════════════════════╣");
         System.out.println(
-                "│ Hidden Walls 2D " + HiddenWalls2D.VERSION
-                        + "  by @pagoru │ Jugador: '"
+                "║ Hidden Walls 2D " + HiddenWalls2D.VERSION
+                        + "  by @pagoru ║ Jugador: '"
                         + map.getPlayer().getSymbol() + "' "
-                        + map.getPlayer().getPrintableHearts() + "│");
-        System.out.println("╘══════════════════════════════════╧═════════════════════════╛");
+                        + map.getPlayer().getPrintableHearts() + "║");
+        System.out.println("╚══════════════════════════════════╩═════════════════════════╝");
     }
 
 }
