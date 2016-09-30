@@ -44,7 +44,8 @@ public class Map {
         HEARTS("❤"),
         EMPTY(" "),
         PLAYER("P"),
-        DESTROYED_WALL("▤");
+        DESTROYED_WALL("▤"),
+        DEAD("☠");
 
         private String symbol;
 

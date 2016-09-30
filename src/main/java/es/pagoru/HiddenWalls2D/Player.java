@@ -76,9 +76,9 @@ public class Player {
                 pHearts += " ";
             }
             if(getHearts() > h){
-                pHearts += "❤";
+                pHearts += Map.MapType.HEARTS.getSymbol();
             } else {
-                pHearts += "☠";
+                pHearts += Map.MapType.DEAD.getSymbol();
             }
         }
         return pHearts + "]";
