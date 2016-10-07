@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
  */
 public class Game {
 
+    private static final String MOVE_INFO = "Per mouret, introdueix: ↑'w', ↓'s', ←'a' o →'d'";
+
     public Game(){
         try {
             loop();
@@ -26,7 +28,7 @@ public class Game {
      */
     public void loop() throws IOException {
 
-        String infoText = "Per mouret, introdueix: ↑'w', ↓'s', ←'a' o →'d'";
+        String infoText = MOVE_INFO;
 
         while(true){
 
@@ -74,7 +76,7 @@ public class Game {
             }
 
             if(x == 0 && y == 0){
-                infoText = "Per mouret, introdueix: ↑'w', ↓'s', ←'a' o →'d'";
+                infoText = MOVE_INFO;
                 continue;
             }
             Vector2Di newPos = new Vector2Di(x, y);
